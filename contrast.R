@@ -25,54 +25,7 @@ writeDifferntiallyExpressedGenes <- function(dds, dirname, comparisonscheme = ''
   rsig <-
     lapply(rall, function(x) x$padj < 0.05)
 
-  affix <- ''
-  suffix1 <- 'all by log2FC.csv'
-  suffix2 <- 'all only diff exp by log2FC.csv'
-  suffix2n <- 'gene names all only diff exp by log2FC.txt'
-  suffix3 <- 'upreg by log2FC.csv'
-  suffix3n <- 'gene names upreg by log2FC.txt'
-  suffix4 <- 'downreg by log2FC.csv'
-  suffix4n <- 'gene names downreg by log2FC.txt'
-  suffix5 <- 'significance.csv'
-  
-  ## affix <- 'DE_Results_D.'
-  ## suffix1 <- 'all_ordered_by_log2FoldChange.csv'
-  ## suffix2 <- 'all_only_differently_expressed_ordered_by_log2FoldChange.csv'
-  ## suffix3 <- 'upregulated_ordered_by_log2FoldChange.csv'
-  ## suffix4 <- 'downregulated_ordered_by_log2FoldChange.csv'
-  ## suffix5 <- 'significance.csv'
-  
-  for (i in 1:length(rnames)) {
-    write.csv(as.data.frame(rall[[i]]),
-              file = sprintf('%s/%s%s%02i %s %s',
-                dirname, affix, comparisonscheme, i, rnames[i], suffix1))
-    write.csv(as.data.frame(ralldiffo[[i]]),
-              file = sprintf('%s/%s%s%02i %s %s',
-                dirname, affix, comparisonscheme, i, rnames[i], suffix2))
-    write.csv(as.data.frame(rupo[[i]]),
-              file = sprintf('%s/%s%s%02i %s %s',
-                dirname, affix, comparisonscheme, i, rnames[i], suffix3))
-    write.csv(as.data.frame(rdowno[[i]]),
-              file = sprintf('%s/%s%s%02i %s %s',
-                dirname, affix, comparisonscheme, i, rnames[i], suffix4))
-    write.csv(as.data.frame(rsig[[i]]),
-              file = sprintf('%s/%s%s%02i %s %s',
-                dirname, affix, comparisonscheme, i, rnames[i], suffix5))
-    cat(paste(rownames(ralldiffo[[i]]), collapse = '\n'),
-        file = sprintf('%s/%s%s%02i %s %s',
-          dirname, affix, comparisonscheme, i, rnames[i], suffix2n))
-    cat(paste(rownames(rupo[[i]]), collapse = '\n'),
-        file = sprintf('%s/%s%s%02i %s %s',
-          dirname, affix, comparisonscheme, i, rnames[i], suffix3n))
-    cat(paste(rownames(rdowno[[i]]), collapse = '\n'),
-        file = sprintf('%s/%s%s%02i %s %s',
-          dirname, affix, comparisonscheme, i, rnames[i], suffix4n))
-    cat(sprintf('%s: %s genes differentially expressed\n', rnames[i], nrow(ralldiffo[[i]])))
-  }
-  return(TRUE)
-}
-
-
+ 
 
 load('../../dds[[sp]][[scheme]][[formula]].RData')
 
