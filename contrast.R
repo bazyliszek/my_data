@@ -1,29 +1,6 @@
 
 
 
-writeDifferntiallyExpressedGenes <- function(dds, dirname, comparisonscheme = '') {
-  rnames_change <- resultsNames(dds)
-  rall <-
-    lapply(as.list(rnames), function(factorname) results(dds, factorname))
-  ralldiff <-
-    lapply(rall, function(x) x[which(x$padj < 0.05), ])
-  ## why which()? because we have NAs
-  ralldiffo <-
-    lapply(ralldiff,
-           function(x) x[order(x$log2FoldChange, decreasing = TRUE), ])
-  genenamesdiff <- rownames(ralldiffo)
-  rup <-
-    lapply(ralldiff, function(x) x[which(x$log2FoldChange > 0), ])
-  rupo <-
-    lapply(rup, function(x) x[order(x$log2FoldChange, decreasing = TRUE), ])
-  genenamesup <- rownames(rupo)
-  rdown <-
-    lapply(ralldiff, function(x) x[which(x$log2FoldChange < 0), ]) ## correct this in the original script 2014-04-15
-  rdowno <-
-    lapply(rdown, function(x) x[order(x$log2FoldChange, decreasing = TRUE), ])
-  genenamesdown <- rownames(rdowno)
-  rsig <-
-    lapply(rall, function(x) x$padj < 0.05)
 
  
 
